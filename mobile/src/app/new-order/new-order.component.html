@@ -1,0 +1,7 @@
+<md-card *ngFor="let item of drinkService.incredients">
+  <md-checkbox  [checked]="item.selected" (change)="item.selected = !item.selected">
+    {{item.name}}
+  </md-checkbox>
+</md-card>
+
+<button *ngFor="let recipe of drinkService.getAvailableRecipes()" md-raised-button (click)="order(recipe)">{{ recipe.name }}</button>

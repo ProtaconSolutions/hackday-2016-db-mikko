@@ -4,7 +4,11 @@ import { Injectable } from '@angular/core';
 
 export interface IOrder {
     key?: string,
-    state?: string,
+
+    // 0 ordered
+    // 1 processing
+    // 2 :))))))
+    state?: number,
     name: string,
     recipe: number[]
 }
@@ -17,21 +21,28 @@ export class OrdersService {
     }
 
     public create(order: IOrder) {
-        let newOrder = this.af.database.list("orders/").push(order);
-        order.key = newOrder.key;
-        this.orders.push(order);
+        let key = this.af.database.list("orders/").push(order).key;
         
+        order.key = key;
+
+        this.orders.push(order);
+
         this.af.database.object(`orders/${order.key}`).subscribe(x => {
             order.state = x.state;
-        })
+        });
 
         return order;
+    }
+
+    private randomPour() {
+        return Math.floor(Math.random() * 6); 
     }
 
     public surpriseMe() {
         return this.create({
             name: "SurpriseMe",
-            recipe: [1,2,3,4,0,0],
+            recipe: [this.randomPour(),this.randomPour(),this.randomPour(),this.randomPour()],
+            state: 0
         });
     }
 }

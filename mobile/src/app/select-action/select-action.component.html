@@ -1,0 +1,8 @@
+<button md-raised-button (click)="surpriseMe()">Yllätä minut</button>
+<button md-raised-button [routerLink]="['/order']">Tee tilaus</button>
+
+<md-card>
+  <md-list>
+    <md-list-item *ngFor="let order of pours">{{order.name}} state: {{order.state}}</md-list-item>
+  </md-list>
+</md-card>
