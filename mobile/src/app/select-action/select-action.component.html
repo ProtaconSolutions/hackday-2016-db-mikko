@@ -1,4 +1,4 @@
-<md-card *ngFor="let item of drinkService.incredients">
+<md-card *ngFor="let item of drinkService.incredients" (click)="item.selected = !item.selected">
   <md-checkbox  [checked]="item.selected" (change)="item.selected = !item.selected">
     {{item.name}}
   </md-checkbox>
