@@ -26,10 +26,10 @@ ordersRef.on('child_removed', function(data) {
 });
 
 setup();
-test(0, 10000);
 
 function pour(key, data) {
   console.log(data);
+
   if (data.state !== 0 || !data.recipe) {
     return;
   }
