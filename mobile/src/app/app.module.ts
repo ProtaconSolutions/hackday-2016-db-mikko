@@ -6,7 +6,17 @@ import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 
+import { AngularFireModule } from 'angularfire2';
+
 import 'hammerjs';
+
+export const firebaseConfig = {
+   apiKey: "AIzaSyDV_ky2n9xsvuMpst6UXTz1zYYBoRPdszE",
+   authDomain: "dbmikko.firebaseapp.com",
+   databaseURL: "https://dbmikko.firebaseio.com",
+   storageBucket: "dbmikko.appspot.com",
+   messagingSenderId: "895556899408"
+};
 
 @NgModule({
   declarations: [
@@ -16,7 +26,8 @@ import 'hammerjs';
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
