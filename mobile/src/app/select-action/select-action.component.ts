@@ -1,3 +1,4 @@
+import { IDrinkRecipe, AvailableDrinkService } from './../service/availableDrink.service';
 import { IOrder, OrdersService } from './../service/orders.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,10 +11,14 @@ export class SelectActionComponent {
   public pours: IOrder[] = [];
   public messaging: any;
 
-  constructor(private orders: OrdersService) {
+  constructor(public drinkService: AvailableDrinkService, private orders: OrdersService) {
   }
 
   public surpriseMe() {
     this.pours.push(this.orders.surpriseMe());
+  }
+
+  public order(order: IDrinkRecipe) {
+    this.pours.push(this.orders.create(order.recipe));
   }
 }

@@ -1,4 +1,4 @@
-import { AvailableDrinkService } from './../service/availableDrink.service';
+import { AvailableDrinkService, IDrinkRecipe } from './../service/availableDrink.service';
 import { IOrder, OrdersService } from './../service/orders.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class NewOrderComponent {
-  constructor(public drinkService: AvailableDrinkService) {
+  constructor(public drinkService: AvailableDrinkService, private orderService: OrdersService) {
+  }
+
+  public order(order: IDrinkRecipe) {
+    this.orderService.create(order.recipe);
   }
 }

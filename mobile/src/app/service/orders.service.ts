@@ -9,7 +9,6 @@ export interface IOrder {
     // 1 processing
     // 2 :))))))
     state?: number,
-    name: string,
     recipe: number[]
 }
 
@@ -17,10 +16,12 @@ export interface IOrder {
 export class OrdersService {
     private orders: IOrder[] = [];
 
-    constructor(private af: AngularFire) {
-    }
+    constructor(private af: AngularFire) {}
 
     public create(order: IOrder) {
+        if(!order.state)
+            order.state = 0;
+
         let key = this.af.database.list("orders/").push(order).key;
         
         order.key = key;
@@ -40,9 +41,18 @@ export class OrdersService {
 
     public surpriseMe() {
         return this.create({
-            name: "SurpriseMe",
             recipe: [this.randomPour(),this.randomPour(),this.randomPour(),this.randomPour()],
-            state: 0
         });
+    }
+
+    public getProgress(): number {
+        let funnyValue = this.orders
+            .map(x => 2 - x.state)
+            .reduce((a,b) => a + b, 0)*25;
+
+        if(funnyValue > 100)
+            return 100;
+
+        return funnyValue;
     }
 }

@@ -1,3 +1,4 @@
+import { IOrder, OrdersService } from './orders.service';
 import { Injectable } from '@angular/core';
 
 export interface ISelectedIncredient {
@@ -8,10 +9,13 @@ export interface ISelectedIncredient {
 export interface IDrinkRecipe {
     name: string,
     incredients: string[],
+    recipe: IOrder
 } 
 
 @Injectable()
 export class AvailableDrinkService {
+    constructor() {}
+
     public incredients: ISelectedIncredient[] = [
         { name: 'Jallu' },
         { name: 'Maito' },
@@ -21,11 +25,17 @@ export class AvailableDrinkService {
     private recipes: IDrinkRecipe[] = [
         {
             name: 'Jallumaito',
-            incredients: ['Jallu', 'Maito']
+            incredients: ['Jallu', 'Maito'],
+            recipe: {
+                recipe: [0, 5, 5, 0]
+            }
         },
         {
             name: 'Olut',
-            incredients: ['Maltaat']
+            incredients: ['Maltaat'],
+            recipe: {
+                recipe: [10, 0, 0, 0]
+            }
         }
     ]
 
@@ -35,6 +45,6 @@ export class AvailableDrinkService {
 
     public getAvailableRecipes(): IDrinkRecipe[] {
         return this.recipes.filter(recipe => recipe.incredients
-        .find(incredient => this.isIncredientSelected(incredient)));
+            .find(incredient => this.isIncredientSelected(incredient)));
     }
 }

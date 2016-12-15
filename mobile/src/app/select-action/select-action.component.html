@@ -1,8 +1,8 @@
-<button md-raised-button (click)="surpriseMe()">Yllätä minut</button>
-<button md-raised-button [routerLink]="['/order']">Tee tilaus</button>
-
-<md-card>
-  <md-list>
-    <md-list-item *ngFor="let order of pours">{{order.name}} state: {{order.state}}</md-list-item>
-  </md-list>
+<md-card *ngFor="let item of drinkService.incredients">
+  <md-checkbox  [checked]="item.selected" (change)="item.selected = !item.selected">
+    {{item.name}}
+  </md-checkbox>
 </md-card>
+
+<button md-raised-button (click)="surpriseMe()" color="primary">Yllätä minut</button>
+<button *ngFor="let recipe of drinkService.getAvailableRecipes()" color="primary" md-raised-button (click)="order(recipe)">{{ recipe.name }}</button>

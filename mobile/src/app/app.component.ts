@@ -9,4 +9,9 @@ import { Component, Inject } from '@angular/core';
   providers: [OrdersService, AvailableDrinkService]
 })
 export class AppComponent {
+  constructor(private orderService: OrdersService) {}
+
+  public getProgress(): number {
+    return this.orderService.getProgress();
+  }
 }

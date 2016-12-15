@@ -1,6 +1,7 @@
 <div layout="column" class="relative" layout-fill role="main">
   <md-toolbar color="primary">
-    DB-Mikko Mobile
+     DB-Mikko Mobile
   </md-toolbar>
+  <md-progress-bar mode="determinate" [value]="getProgress()"></md-progress-bar>
   <router-outlet></router-outlet>
 </div>
